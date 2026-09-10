@@ -1,0 +1,170 @@
+/* ============================================================
+   Tinkoff Design System (TDS) токены — светлая + тёмная темы
+   ============================================================ */
+:root {
+  --tds-yellow: #ffdd2d;
+  --tds-yellow-pressed: #fab619;
+  --tds-yellow-soft: #fff5c2;
+  --tds-black: #333333;
+
+  --tds-text: #333333;
+  --tds-muted: rgba(51, 51, 51, 0.55);
+  --tds-bg: #f6f7f8;
+  --tds-card: #ffffff;
+  --tds-border: #e7e9eb;
+  --tds-neutral: #f1f1f3;
+  --tds-green: #00b92d;
+  --tds-green-soft: rgba(0, 185, 45, 0.09);
+  --tds-red: #f52222;
+  --tds-red-soft: rgba(245, 34, 34, 0.08);
+  --tds-warning: #faa805;
+  --tds-warning-soft: rgba(250, 168, 5, 0.14);
+  --radius-card: 16px;
+  --radius-btn: 12px;
+  --shadow-card: 0 2px 8px rgba(0, 0, 0, 0.04), 0 8px 24px rgba(0, 0, 0, 0.05);
+  --shadow-pop: 0 4px 12px rgba(0, 0, 0, 0.08), 0 12px 32px rgba(0, 0, 0, 0.1);
+  color-scheme: light;
+}
+
+[data-theme="dark"] {
+  --tds-text: rgba(255, 255, 255, 0.9);
+  --tds-muted: rgba(255, 255, 255, 0.55);
+  --tds-bg: #202020;
+  --tds-card: #292929;
+  --tds-border: rgba(255, 255, 255, 0.14);
+  --tds-neutral: rgba(255, 255, 255, 0.1);
+  --tds-yellow-soft: rgba(255, 221, 45, 0.18);
+  --tds-green-soft: rgba(0, 185, 45, 0.18);
+  --tds-red-soft: rgba(245, 34, 34, 0.16);
+  --tds-warning-soft: rgba(250, 168, 5, 0.2);
+  --shadow-card: 0 2px 8px rgba(0, 0, 0, 0.35), 0 8px 24px rgba(0, 0, 0, 0.3);
+  --shadow-pop: 0 4px 12px rgba(0, 0, 0, 0.4), 0 12px 32px rgba(0, 0, 0, 0.45);
+  color-scheme: dark;
+}
+
+@import "tailwindcss";
+
+/* Пробрасываем TDS-токены в утилиты Tailwind (bg-tds-card, text-tds-text, …)
+   через @theme inline — значения резолвятся в рантайме, тема переключается живо */
+@theme inline {
+  --color-tds-yellow: var(--tds-yellow);
+  --color-tds-yellow-pressed: var(--tds-yellow-pressed);
+  --color-tds-yellow-soft: var(--tds-yellow-soft);
+  --color-tds-black: var(--tds-black);
+  --color-tds-text: var(--tds-text);
+  --color-tds-muted: var(--tds-muted);
+  --color-tds-bg: var(--tds-bg);
+  --color-tds-card: var(--tds-card);
+  --color-tds-border: var(--tds-border);
+  --color-tds-neutral: var(--tds-neutral);
+  --color-tds-green: var(--tds-green);
+  --color-tds-green-soft: var(--tds-green-soft);
+  --color-tds-red: var(--tds-red);
+  --color-tds-red-soft: var(--tds-red-soft);
+  --color-tds-warning: var(--tds-warning);
+  --color-tds-warning-soft: var(--tds-warning-soft);
+  --radius-tds-card: var(--radius-card);
+  --radius-tds-btn: var(--radius-btn);
+  --shadow-tds-card: var(--shadow-card);
+  --shadow-tds-pop: var(--shadow-pop);
+  --font-sans:
+    "Manrope", "Tinkoff Sans", "T-Sans", system-ui, -apple-system, "Segoe UI",
+    Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  font-family:
+    "Manrope", "Tinkoff Sans", "T-Sans", system-ui, -apple-system, "Segoe UI",
+    Roboto, "Helvetica Neue", Arial, sans-serif;
+  background: var(--tds-bg);
+  color: var(--tds-text);
+  min-height: 100vh;
+  min-height: 100dvh;
+  line-height: 1.45;
+  transition:
+    background 0.2s,
+    color 0.2s;
+}
+
+::selection {
+  background: var(--tds-yellow);
+  color: var(--tds-black);
+}
+
+button {
+  font-family: inherit;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+:focus-visible {
+  outline: 2px solid var(--tds-black);
+  outline-offset: 2px;
+}
+[data-theme="dark"] :focus-visible {
+  outline-color: var(--tds-yellow);
+}
+
+/* Слайдер курса в стиле TDS (кастомный трек с заполнением) */
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 6px;
+  border-radius: 999px;
+  background: var(--tds-neutral);
+  cursor: pointer;
+}
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--tds-yellow);
+  border: 2px solid var(--tds-black);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+  cursor: grab;
+  transition: transform 0.15s;
+}
+input[type="range"]::-webkit-slider-thumb:hover {
+  transform: scale(1.1);
+}
+input[type="range"]::-webkit-slider-thumb:active {
+  cursor: grabbing;
+  transform: scale(1.05);
+}
+input[type="range"]::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--tds-yellow);
+  border: 2px solid var(--tds-black);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+  cursor: grab;
+}
+input[type="range"]::-moz-range-track {
+  height: 6px;
+  border-radius: 999px;
+  background: transparent;
+}
+
+/* Отключаем анимации по запросу пользователя */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

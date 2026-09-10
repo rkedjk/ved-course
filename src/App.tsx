@@ -6,6 +6,7 @@ import { ModuleView } from "./components/ModuleView";
 import { GlossaryView } from "./components/GlossaryView";
 import { AchievementsView } from "./components/AchievementsView";
 import { XpBar } from "./components/XpBar";
+import { Credits } from "./components/Credits";
 import { useStore } from "./store";
 import { fireConfetti } from "./lib/confetti";
 import { celebrate, tick } from "./lib/haptics";
@@ -168,7 +169,9 @@ export default function App() {
             transition={{ duration: 0.15 }}
           >
             {view === "module" && (
-              <ModuleView
+              <>
+                {idx === 0 && <Credits />}
+                <ModuleView
                 module={module}
                 isFirst={idx === 0}
                 isLast={idx === modules.length - 1}
@@ -179,6 +182,7 @@ export default function App() {
                     : setView("achievements")
                 }
               />
+              </>
             )}
             {view === "glossary" && <GlossaryView />}
             {view === "achievements" && <AchievementsView />}
@@ -225,11 +229,13 @@ export default function App() {
           className="cursor-pointer"
           title="тук-тук"
         >
-          Учебный проект по предмету «Учёт и анализ ВЭД» · преподаватель
-          Карпушина Е. В. · сделано с ❤️ и валютным риском
+          Лекция: к.э.н., доцент Карпушина Елена Валерьевна, кафедра «Экономическая
+          безопасность, анализ и учёт» РГРТУ им. В.Ф. Уткина · Разработка: Радмир
+          Мустафин, QA-инженер Т-Банка
         </button>
         <div className="mt-0.5 opacity-60">
-          Не является финансовой рекомендацией 🙂 ·{" "}
+          Учебный проект по предмету «Учёт и анализ ВЭД» · сделано с ❤️ и валютным
+          риском · не является финансовой рекомендацией 🙂 ·{" "}
           {eggClicks > 0 && `${5 - eggClicks}…`}
         </div>
       </footer>

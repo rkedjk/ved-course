@@ -172,16 +172,16 @@ export default function App() {
               <>
                 {idx === 0 && <Credits />}
                 <ModuleView
-                module={module}
-                isFirst={idx === 0}
-                isLast={idx === modules.length - 1}
-                onPrev={() => goModule(idx - 1)}
-                onNext={() =>
-                  idx < modules.length - 1
-                    ? goModule(idx + 1)
-                    : setView("achievements")
-                }
-              />
+                  module={module}
+                  isFirst={idx === 0}
+                  isLast={idx === modules.length - 1}
+                  onPrev={() => goModule(idx - 1)}
+                  onNext={() =>
+                    idx < modules.length - 1
+                      ? goModule(idx + 1)
+                      : setView("achievements")
+                  }
+                />
               </>
             )}
             {view === "glossary" && <GlossaryView />}
@@ -229,13 +229,13 @@ export default function App() {
           className="cursor-pointer"
           title="тук-тук"
         >
-          Лекция: к.э.н., доцент Карпушина Елена Валерьевна, кафедра «Экономическая
-          безопасность, анализ и учёт» РГРТУ им. В.Ф. Уткина · Разработка: Радмир
-          Мустафин, QA-инженер Т-Банка
+          Лекция: к.э.н., доцент Карпунина Елена Валерьевна, кафедра
+          «Экономическая безопасность, анализ и учёт» РГРТУ им. В.Ф. Уткина ·
+          Разработка: Радмир Мустафин, QA-инженер Т-Банка
         </button>
         <div className="mt-0.5 opacity-60">
-          Учебный проект по предмету «Учёт и анализ ВЭД» · сделано с ❤️ и валютным
-          риском · не является финансовой рекомендацией 🙂 ·{" "}
+          Учебный проект по предмету «Учёт и анализ ВЭД» · сделано с ❤️ и
+          валютным риском · не является финансовой рекомендацией 🙂 ·{" "}
           {eggClicks > 0 && `${5 - eggClicks}…`}
         </div>
       </footer>

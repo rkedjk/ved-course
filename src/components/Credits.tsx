@@ -1,5 +1,5 @@
 const lecturer = {
-  name: "Карпушина Елена Валерьевна",
+  name: "Карпунина Елена Валерьевна",
   titles: "кандидат экономических наук, доцент",
   position:
     "доцент кафедры «Экономическая безопасность, анализ и учёт» РГРТУ им. В.Ф. Уткина",
@@ -9,7 +9,8 @@ const lecturer = {
     "Ведёт дисциплину «Учёт и анализ внешнеэкономической деятельности»",
     "Образование: Рязанская ГСХА им. П.А. Костычева, 2006 (диплом с отличием)",
   ],
-  profile: "https://rsreu.ru/faculties/ief/kafedri/eau/menu-1131/7292-item-7292",
+  profile:
+    "https://rsreu.ru/faculties/ief/kafedri/eau/menu-1131/7292-item-7292",
 };
 
 /** Карточки «О лекторе» и «Разработка» — показываются в начале лекции. */
@@ -19,7 +20,8 @@ export function Credits() {
       <div className="rounded-tds-card border border-tds-border bg-tds-card p-3 shadow-tds-card">
         <div className="text-sm font-bold text-tds-text">👩‍🏫 О лекторе</div>
         <div className="mt-1 text-[13px] leading-relaxed text-tds-text">
-          <strong>{lecturer.name}</strong> — {lecturer.titles}, {lecturer.position}.
+          <strong>{lecturer.name}</strong> — {lecturer.titles},{" "}
+          {lecturer.position}.
         </div>
         <details className="mt-1 text-[12px] leading-relaxed text-tds-muted">
           <summary className="cursor-pointer font-semibold text-tds-yellow-pressed">
@@ -46,8 +48,8 @@ export function Credits() {
           <strong>Радмир Мустафин</strong> — QA-инженер Т-Банка
         </div>
         <div className="mt-1 text-[12px] leading-relaxed text-tds-muted">
-          Интерактивная лекция: живые примеры, игры, квизы, вибро-отдача и немного
-          валютного риска в футере.
+          Интерактивная лекция: живые примеры, игры, квизы, вибро-отдача и
+          немного валютного риска в футере.
         </div>
       </div>
     </div>

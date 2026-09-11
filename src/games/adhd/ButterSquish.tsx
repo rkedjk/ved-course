@@ -393,7 +393,9 @@ export function ButterSquish() {
         envTex.dispose();
         pmrem.dispose();
         for (const m of [body, earFront, earBack])
-          for (const mat of (Array.isArray(m.material) ? m.material : [m.material]) as Material[])
+          for (const mat of (Array.isArray(m.material)
+            ? m.material
+            : [m.material]) as Material[])
             mat.dispose();
         renderer.dispose();
       };

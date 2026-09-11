@@ -2,7 +2,6 @@ import { useRef, useState, type ReactNode } from "react";
 import { useStore } from "../store";
 import { SubwayVideo } from "../games/adhd/SubwayVideo";
 import { Miku } from "../games/adhd/Miku";
-import { ButterSquish } from "../games/adhd/ButterSquish";
 import { pop } from "../lib/sound";
 import { tick } from "../lib/haptics";
 
@@ -37,18 +36,7 @@ export function AdhdMode() {
             <PopIt />
           </DragWindow>
         )}
-        {adhd.butter && (
-          <DragWindow
-            title="🧈 Butter squish"
-            start={{
-              x: Math.max(12, window.innerWidth - 240),
-              y: Math.min(window.innerHeight - 280, 300),
-            }}
-            onClose={() => setAdhd({ butter: false })}
-          >
-            <ButterSquish />
-          </DragWindow>
-        )}
+        {/* 🧈 масло временно отключено: пружина трясёт вместо сквиша */}
       </div>
       {adhd.miku && <Miku />}
 
@@ -75,12 +63,6 @@ export function AdhdMode() {
             onClick={() => setAdhd({ popit: !adhd.popit })}
             label="🔵"
             title="Поп-ит"
-          />
-          <Toggle
-            on={adhd.butter}
-            onClick={() => setAdhd({ butter: !adhd.butter })}
-            label="🧈"
-            title="Масло"
           />
           <button
             type="button"

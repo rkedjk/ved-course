@@ -41,8 +41,8 @@ export function AdhdMode() {
           <DragWindow
             title="🧈 Butter squish"
             start={{
-              x: Math.max(12, window.innerWidth - 220),
-              y: Math.min(window.innerHeight - 260, 300),
+              x: Math.max(12, window.innerWidth - 240),
+              y: Math.min(window.innerHeight - 280, 300),
             }}
             onClose={() => setAdhd({ butter: false })}
           >

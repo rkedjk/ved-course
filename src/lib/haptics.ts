@@ -1,20 +1,25 @@
 import { useStore } from "../store";
+import { tap } from "./sound";
 
 /**
- * Вибро-отдача (navigator.vibrate).
- * Android/Chrome поддерживают; iOS Safari — нет (тихо пропускаем).
+ * Вибро-отдача.
+ * Android/Chrome — navigator.vibrate. iOS Safari не поддерживает вибрацию,
+ * поэтому включается звуковой фолбэк (короткий «цок»).
  * Уважает настройку пользователя и prefers-reduced-motion.
  */
 export function haptic(pattern: number | number[]) {
- const s = useStore.getState();
- if (!s.haptics) return;
- if (!navigator.vibrate) return;
- if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
- try {
-  navigator.vibrate(pattern);
- } catch {
-  /* ignore */
- }
+  const s = useStore.getState();
+  if (!s.haptics) return;
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  if (navigator.vibrate) {
+    try {
+      navigator.vibrate(pattern);
+    } catch {
+      /* ignore */
+    }
+    return;
+  }
+  tap(); // iOS: звуковая имитация таптика
 }
 
 /** Короткий «тик» — правильный ответ, успешное действие. */

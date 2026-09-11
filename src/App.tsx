@@ -120,7 +120,9 @@ export default function App() {
                 title={adhd.on ? "ADHD-mode: вкл" : "ADHD-mode: выкл"}
                 onClick={() => setAdhd({ on: !adhd.on })}
               >
-                <span className={adhd.on ? "" : "opacity-40 grayscale"}>🧠</span>
+                <span className={adhd.on ? "" : "opacity-40 grayscale"}>
+                  🧠
+                </span>
               </IconBtn>
             </div>
           </div>

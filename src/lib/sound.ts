@@ -33,7 +33,8 @@ export function pop() {
   const noise = ac.createBufferSource();
   const buf = ac.createBuffer(1, ac.sampleRate * 0.03, ac.sampleRate);
   const data = buf.getChannelData(0);
-  for (let i = 0; i < data.length; i++) data[i] = (Math.random() * 2 - 1) * (1 - i / data.length);
+  for (let i = 0; i < data.length; i++)
+    data[i] = (Math.random() * 2 - 1) * (1 - i / data.length);
   const ng = ac.createGain();
   ng.gain.setValueAtTime(0.08, t);
   ng.gain.exponentialRampToValueAtTime(0.001, t + 0.03);
@@ -74,4 +75,20 @@ export function thud() {
   osc.connect(gain).connect(ac.destination);
   osc.start(t);
   osc.stop(t + 0.14);
+}
+
+/** Микро-«цок» — имитация таптика на iOS (где нет navigator.vibrate). */
+export function tap() {
+  const ac = audio();
+  if (!ac) return;
+  const t = ac.currentTime;
+  const osc = ac.createOscillator();
+  const gain = ac.createGain();
+  osc.type = "sine";
+  osc.frequency.setValueAtTime(900, t);
+  gain.gain.setValueAtTime(0.06, t);
+  gain.gain.exponentialRampToValueAtTime(0.0001, t + 0.025);
+  osc.connect(gain).connect(ac.destination);
+  osc.start(t);
+  osc.stop(t + 0.03);
 }

@@ -18,7 +18,10 @@ export function AdhdMode() {
         {adhd.subway && (
           <DragWindow
             title="🏃 Subway Surfers"
-            start={{ x: window.innerWidth - 170, y: Math.max(12, window.innerHeight - 380) }}
+            start={{
+              x: window.innerWidth - 170,
+              y: Math.max(12, window.innerHeight - 380),
+            }}
             onClose={() => setAdhd({ subway: false })}
           >
             <SubwayVideo />
@@ -39,10 +42,27 @@ export function AdhdMode() {
       {/* Панель управления */}
       <div className="fixed bottom-24 right-3 z-50 flex flex-col items-end gap-1.5 md:bottom-4">
         <div className="pointer-events-auto flex flex-wrap items-center gap-1.5 rounded-tds-card border border-tds-border bg-tds-card/95 p-1.5 shadow-tds-pop backdrop-blur">
-          <span className="px-1.5 text-xs font-extrabold text-tds-text">🧠 ADHD</span>
-          <Toggle on={adhd.subway} onClick={() => setAdhd({ subway: !adhd.subway })} label="🏃" title="Subway" />
-          <Toggle on={adhd.miku} onClick={() => setAdhd({ miku: !adhd.miku })} label="🎀" title="Мику" />
-          <Toggle on={adhd.popit} onClick={() => setAdhd({ popit: !adhd.popit })} label="🔵" title="Поп-ит" />
+          <span className="px-1.5 text-xs font-extrabold text-tds-text">
+            🧠 ADHD
+          </span>
+          <Toggle
+            on={adhd.subway}
+            onClick={() => setAdhd({ subway: !adhd.subway })}
+            label="🏃"
+            title="Subway"
+          />
+          <Toggle
+            on={adhd.miku}
+            onClick={() => setAdhd({ miku: !adhd.miku })}
+            label="🎀"
+            title="Мику"
+          />
+          <Toggle
+            on={adhd.popit}
+            onClick={() => setAdhd({ popit: !adhd.popit })}
+            label="🔵"
+            title="Поп-ит"
+          />
           <button
             type="button"
             onClick={() => setAdhd({ on: false })}
@@ -164,7 +184,9 @@ function PopIt() {
     <div className="w-[196px] select-none">
       <div className="mb-1.5 flex items-center justify-between text-[11px] font-bold text-tds-muted">
         <span>🫧 Нажимай!</span>
-        <span className="tabular-nums">{count}/{ROWS * COLS}</span>
+        <span className="tabular-nums">
+          {count}/{ROWS * COLS}
+        </span>
       </div>
       <div
         className="grid gap-1.5 rounded-tds-btn border border-tds-border bg-tds-bg p-2"
@@ -172,6 +194,7 @@ function PopIt() {
       >
         {Array.from({ length: ROWS * COLS }, (_, i) => {
           const on = pressed.has(i);
+          const hue = (i * 360) / (ROWS * COLS); // радуга по сетке
           return (
             <button
               key={i}
@@ -181,8 +204,8 @@ function PopIt() {
               className="aspect-square w-full rounded-full transition-transform duration-100"
               style={{
                 background: on
-                  ? "radial-gradient(circle at 50% 40%, #f6f7f8, #d8dade)"
-                  : "radial-gradient(circle at 35% 30%, #fff, #ffdd2d 65%, #fab619)",
+                  ? "radial-gradient(circle at 50% 40%, #f2f2f4, #c9cbd1)"
+                  : `radial-gradient(circle at 35% 30%, hsl(${hue} 95% 78%), hsl(${hue} 90% 60%) 65%, hsl(${hue} 85% 46%))`,
                 boxShadow: on
                   ? "inset 0 3px 6px rgba(0,0,0,0.25)"
                   : "0 2px 4px rgba(0,0,0,0.18), inset 0 -3px 5px rgba(0,0,0,0.12)",

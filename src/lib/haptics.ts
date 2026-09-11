@@ -1,31 +1,47 @@
 import { useStore } from "../store";
-import { tap } from "./sound";
+import { WebHaptics } from "web-haptics";
 
 /**
- * Вибро-отдача.
- * Android/Chrome — navigator.vibrate. iOS Safari не поддерживает вибрацию,
- * поэтому включается звуковой фолбэк (короткий «цок»).
- * Не глушится prefers-reduced-motion (вибрация — не анимация).
+ * Вибро-отдача через библиотеку web-haptics (сама решает платформу):
+ * - Android/Chrome — navigator.vibrate (PWM-интенсивность)
+ * - iOS Safari 17.4–26.4 — трюк со скрытым iOS-свитчем → Taptic Engine
+ *   (на iOS 26.5+ Apple запатчила трюк — таптик в браузере невозможен)
+ * - Desktop — тихо (можно включить debug-звук)
  */
-export function haptic(pattern: number | number[]) {
+
+type HapticInput =
+  | number
+  | number[]
+  | "light"
+  | "medium"
+  | "heavy"
+  | "soft"
+  | "rigid"
+  | "selection"
+  | "nudge"
+  | "buzz"
+  | "success"
+  | "warning"
+  | "error";
+
+let instance: WebHaptics | null = null;
+const getInstance = () => (instance ??= new WebHaptics());
+
+export function haptic(input: HapticInput) {
   const s = useStore.getState();
   if (!s.haptics) return;
-  if (navigator.vibrate) {
-    try {
-      navigator.vibrate(pattern);
-    } catch {
+  getInstance()
+    .trigger(input)
+    .catch(() => {
       /* ignore */
-    }
-    return;
-  }
-  tap(); // iOS: звуковая имитация таптика
+    });
 }
 
 /** Короткий «тик» — правильный ответ, успешное действие. */
-export const tick = () => haptic([18, 22, 18]);
-/** Двойной «буз» — ошибка. */
-export const buzz = () => haptic([40, 50, 40]);
-/** Праздничный паттерн — конец уровня/идеальный квиз. */
-export const celebrate = () => haptic([20, 40, 20, 40, 80]);
+export const tick = () => haptic("light");
+/** Ошибка — двойной/тройной «буз». */
+export const buzz = () => haptic("error");
+/** Празднование — конец уровня/идеальный квиз. */
+export const celebrate = () => haptic("success");
 /** «Сделка» — открытие/закрытие позиции в симуляторе. */
-export const deal = () => haptic([30, 40, 30]);
+export const deal = () => haptic("medium");

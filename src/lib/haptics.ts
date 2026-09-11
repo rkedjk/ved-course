@@ -24,14 +24,15 @@ type HapticInput =
   | "warning"
   | "error";
 
-// Прямые паттерны для navigator.vibrate (Android)
+// Прямые паттерны для navigator.vibrate (Android).
+// Рекомендация il.ly: для тапа идеал ~50мс, всё выше 100мс — уже долго.
 const DIRECT: Record<string, number[]> = {
-  light: [30],
+  light: [50],
   medium: [35, 25, 35],
   heavy: [70],
-  soft: [25],
+  soft: [30],
   rigid: [40],
-  selection: [18],
+  selection: [30],
   nudge: [50, 60, 40],
   success: [30, 50, 40, 50, 60],
   warning: [40, 60, 40],

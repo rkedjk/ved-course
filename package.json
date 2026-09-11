@@ -18,6 +18,7 @@
     "react-dom": "^19.2.8",
     "react-markdown": "^10.1.0",
     "remark-gfm": "^4.0.1",
+    "three": "^0.186.0",
     "web-haptics": "^0.0.6",
     "zustand": "^5.0.15"
   },
@@ -26,6 +27,7 @@
     "@types/canvas-confetti": "^1.9.0",
     "@types/react": "^19.2.18",
     "@types/react-dom": "^19.2.5",
+    "@types/three": "^0.185.4",
     "@vitejs/plugin-react": "^6.1.0",
     "tailwindcss": "^4.3.3",
     "typescript": "^7.0.2",

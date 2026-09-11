@@ -92,3 +92,39 @@ export function tap() {
   osc.start(t);
   osc.stop(t + 0.03);
 }
+
+/** Мягкий ASMR-«хлюп» — сжимание масла (шум через lowpass + низкий sine). */
+export function squelch() {
+  const ac = audio();
+  if (!ac) return;
+  const t = ac.currentTime;
+
+  // шум с затуханием через низкочастотный фильтр — «мокрый» хлюп
+  const noise = ac.createBufferSource();
+  const buf = ac.createBuffer(1, ac.sampleRate * 0.28, ac.sampleRate);
+  const data = buf.getChannelData(0);
+  for (let i = 0; i < data.length; i++)
+    data[i] = (Math.random() * 2 - 1) * (1 - i / data.length);
+  const lp = ac.createBiquadFilter();
+  lp.type = "lowpass";
+  lp.frequency.setValueAtTime(520, t);
+  lp.frequency.exponentialRampToValueAtTime(140, t + 0.24);
+  const ng = ac.createGain();
+  ng.gain.setValueAtTime(0.22, t);
+  ng.gain.exponentialRampToValueAtTime(0.001, t + 0.26);
+  noise.buffer = buf;
+  noise.connect(lp).connect(ng).connect(ac.destination);
+  noise.start(t);
+
+  // низкий «мясистый» тон
+  const osc = ac.createOscillator();
+  const og = ac.createGain();
+  osc.type = "sine";
+  osc.frequency.setValueAtTime(150, t);
+  osc.frequency.exponentialRampToValueAtTime(55, t + 0.2);
+  og.gain.setValueAtTime(0.14, t);
+  og.gain.exponentialRampToValueAtTime(0.001, t + 0.22);
+  osc.connect(og).connect(ac.destination);
+  osc.start(t);
+  osc.stop(t + 0.24);
+}

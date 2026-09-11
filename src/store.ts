@@ -8,6 +8,7 @@ export interface AdhdState {
     subway: boolean;
     miku: boolean;
     popit: boolean;
+    butter: boolean;
 }
 
 export const adhdDefaults: AdhdState = {
@@ -15,6 +16,7 @@ export const adhdDefaults: AdhdState = {
     subway: true,
     miku: true,
     popit: true,
+    butter: true,
 };
 
 export function levelFor(xp: number): number {

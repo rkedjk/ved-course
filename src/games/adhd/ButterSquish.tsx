@@ -16,8 +16,9 @@ export function ButterSquish() {
   useEffect(() => {
     let disposed = false;
     let raf = 0;
-    const reduced =
-      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const reduced = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
 
     void (async () => {
       const THREE = await import("three");
@@ -73,8 +74,7 @@ export function ButterSquish() {
           g.fillText("BUTTER", 256, 160);
           // складки у краёв
           g.fillStyle = "rgba(140, 100, 20, 0.28)";
-          for (let x = 12; x < 60; x += 10)
-            g.fillRect(x, 0, 3, 256);
+          for (let x = 12; x < 60; x += 10) g.fillRect(x, 0, 3, 256);
           for (let x = 512 - 60; x < 512 - 10; x += 10)
             g.fillRect(x, 0, 3, 256);
         }
@@ -102,6 +102,10 @@ export function ButterSquish() {
           shader.uniforms.uSquishPoint = uPoint;
           shader.uniforms.uSquishDepth = uDepth;
           shader.uniforms.uSquishRadius = uRadius;
+          // three не генерирует объявления для добавленных uniform — вставляем сами
+          shader.vertexShader =
+            "uniform vec3 uSquishPoint;\nuniform float uSquishDepth;\nuniform float uSquishRadius;\n" +
+            shader.vertexShader;
           shader.vertexShader = shader.vertexShader.replace(
             "#include <begin_vertex>",
             `#include <begin_vertex>

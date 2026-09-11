@@ -129,7 +129,7 @@ export function ButterSquish() {
         makeMat({ color: "#f5e0a8", roughness: 0.18 }), // +y верх — масло
         makeMat({ color: "#f5e0a8", roughness: 0.18 }), // -y низ — масло
       ]);
-      butter.rotation.y = -0.55;
+      butter.rotation.y = -0.38;
       butter.rotation.x = 0.12;
       scene.add(butter);
 
@@ -206,7 +206,7 @@ export function ButterSquish() {
         if (!reduced) {
           const t = (now - t0) / 1000;
           butter.position.y = Math.sin(t * 0.6) * 0.02;
-          butter.rotation.y = -0.55 + Math.sin(t * 0.35) * 0.05;
+          butter.rotation.y = -0.38 + Math.sin(t * 0.35) * 0.05;
         }
         renderer.render(scene, camera);
         raf = requestAnimationFrame(frame);

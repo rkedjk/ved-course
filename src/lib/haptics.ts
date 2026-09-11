@@ -5,12 +5,11 @@ import { tap } from "./sound";
  * Вибро-отдача.
  * Android/Chrome — navigator.vibrate. iOS Safari не поддерживает вибрацию,
  * поэтому включается звуковой фолбэк (короткий «цок»).
- * Уважает настройку пользователя и prefers-reduced-motion.
+ * Не глушится prefers-reduced-motion (вибрация — не анимация).
  */
 export function haptic(pattern: number | number[]) {
   const s = useStore.getState();
   if (!s.haptics) return;
-  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
   if (navigator.vibrate) {
     try {
       navigator.vibrate(pattern);
@@ -23,10 +22,10 @@ export function haptic(pattern: number | number[]) {
 }
 
 /** Короткий «тик» — правильный ответ, успешное действие. */
-export const tick = () => haptic(12);
+export const tick = () => haptic([18, 22, 18]);
 /** Двойной «буз» — ошибка. */
-export const buzz = () => haptic([35, 40, 35]);
+export const buzz = () => haptic([40, 50, 40]);
 /** Праздничный паттерн — конец уровня/идеальный квиз. */
-export const celebrate = () => haptic([15, 30, 15, 30, 60]);
+export const celebrate = () => haptic([20, 40, 20, 40, 80]);
 /** «Сделка» — открытие/закрытие позиции в симуляторе. */
-export const deal = () => haptic([25, 35, 25]);
+export const deal = () => haptic([30, 40, 30]);

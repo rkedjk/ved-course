@@ -31,16 +31,18 @@
     <title>Учёт и анализ ВЭД — интерактивная лекция</title>
     <script>
       // Применяем тему до первого кадра, чтобы не было «вспышки»
+      var t = "light";
       try {
-        var t =
-          localStorage.getItem("tds-theme") ||
+        var s = JSON.parse(localStorage.getItem("ved-lecture") || "{}");
+        t =
+          (s.state && s.state.theme) ||
           (window.matchMedia("(prefers-color-scheme: dark)").matches
             ? "dark"
             : "light");
-        document.documentElement.dataset.theme = t;
       } catch (e) {
-        document.documentElement.dataset.theme = "light";
+        /* оставить светлую */
       }
+      document.documentElement.dataset.theme = t;
     </script>
   </head>
   <body>

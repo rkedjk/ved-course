@@ -1,9 +1,8 @@
-import { levelFor, levelProgress, useStore } from "../store";
+import { levelInfo, useStore } from "../store";
 
 export function XpBar() {
     const xp = useStore((s) => s.xp);
-    const lvl = levelFor(xp);
-    const { into } = levelProgress(xp);
+    const { lvl, into } = levelInfo(xp);
     return (
         <div
             className="flex items-center gap-2"

@@ -42,12 +42,11 @@ export function Quiz({
       return;
     }
     const total = quiz.questions.length;
-    const finalCorrect = picked === q.correct ? correct : correct;
-    const pct = Math.round((finalCorrect / total) * 100);
+    const pct = Math.round((correct / total) * 100);
     setFinished(true);
     recordQuiz(quiz.id, pct);
     if (firstTime) {
-      addXp(finalCorrect * 10);
+      addXp(correct * 10);
       if (pct === 100) {
         unlock("quiz-perfect");
         fireCannons();

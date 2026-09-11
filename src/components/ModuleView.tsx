@@ -108,7 +108,7 @@ function BlockView({ block }: { block: Module["blocks"][number] }) {
       return (
         <div className="grid gap-2 sm:grid-cols-2">
           {block.terms.map((id) => (
-            <TermCard key={id} id={id} />
+            <Term key={id} id={id} label={id} />
           ))}
         </div>
       );
@@ -151,8 +151,4 @@ function BlockView({ block }: { block: Module["blocks"][number] }) {
         </details>
       );
   }
-}
-
-function TermCard({ id }: { id: string }) {
-  return <Term id={id} label={id} />;
 }

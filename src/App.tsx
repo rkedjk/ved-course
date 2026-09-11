@@ -7,6 +7,7 @@ import { GlossaryView } from "./components/GlossaryView";
 import { AchievementsView } from "./components/AchievementsView";
 import { XpBar } from "./components/XpBar";
 import { Credits } from "./components/Credits";
+import { AdhdMode } from "./components/AdhdMode";
 import { useStore } from "./store";
 import { fireConfetti } from "./lib/confetti";
 import { celebrate, tick } from "./lib/haptics";
@@ -27,6 +28,8 @@ export default function App() {
   const haptics = useStore((s) => s.haptics);
   const setTheme = useStore((s) => s.setTheme);
   const setHaptics = useStore((s) => s.setHaptics);
+  const adhd = useStore((s) => s.adhd);
+  const setAdhd = useStore((s) => s.setAdhd);
   const done = useStore((s) => s.done);
   const xp = useStore((s) => s.xp);
   const unlock = useStore((s) => s.unlock);
@@ -112,6 +115,12 @@ export default function App() {
                 }}
               >
                 🏆
+              </IconBtn>
+              <IconBtn
+                title={adhd.on ? "ADHD-mode: вкл" : "ADHD-mode: выкл"}
+                onClick={() => setAdhd({ on: !adhd.on })}
+              >
+                <span className={adhd.on ? "" : "opacity-40 grayscale"}>🧠</span>
               </IconBtn>
             </div>
           </div>
@@ -239,6 +248,7 @@ export default function App() {
           {eggClicks > 0 && `${5 - eggClicks}…`}
         </div>
       </footer>
+      <AdhdMode />
     </div>
   );
 }

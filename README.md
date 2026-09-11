@@ -31,7 +31,13 @@
 - Аннотации: кликабельные термины с тултипами, блоки «как в конспекте», ссылки на законы
 - Мемы и easter egg 🥚
 - 📳 Вибро-отдача на мобильных (Android) — настраивается в шапке
+- 🧠 **ADHD-mode** (кнопка в шапке): видео геймплея Subway Surfers в углу, Мику Хацунэ бегает по экрану, поп-ит со звуком — каждый виджет включается отдельно
 - 📱 Полностью адаптивно: нижняя навигация, safe-area, крупные тач-цели
+
+## Атрибуция ADHD-mode
+
+- Спрайты Мику Хацунэ: [CharlesWiiFlowers/MikuPet](https://github.com/CharlesWiiFlowers/MikuPet) (GPL-3.0); персонаж — Crypton Future Media
+- Видео геймплея Subway Surfers: клип с [Internet Archive](https://archive.org/details/vcompress_144) (обрезка 28 сек, без звука)
 
 ## Запуск
 
